@@ -5,6 +5,10 @@ import java.util.Objects;
 
 public final class Card implements Comparable<Card> {
 
+  private static final Comparator<Card> NATURAL_ORDER_COMPARATOR = Comparator
+      .comparing(Card::getSuit)
+      .thenComparing(Card::getRank);
+
   private final Rank rank;
   private final Suit suit;
   private final String representation;
@@ -51,10 +55,7 @@ public final class Card implements Comparable<Card> {
 
   @Override
   public int compareTo(Card other) {
-
-    return Comparator.comparing(Card::getSuit)
-        .thenComparing(Card::getRank).
-        compare(this,other);
+    return NATURAL_ORDER_COMPARATOR.compare(this, other);
   }
 
 }
