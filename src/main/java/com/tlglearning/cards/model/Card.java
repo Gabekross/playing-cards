@@ -1,5 +1,6 @@
 package com.tlglearning.cards.model;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public final class Card implements Comparable<Card> {
@@ -50,11 +51,10 @@ public final class Card implements Comparable<Card> {
 
   @Override
   public int compareTo(Card other) {
-    int comparison = suit.compareTo(other.suit);
-    if (comparison == 0) {
-      comparison = rank.compareTo(other.rank);
-    }
-    return comparison;
+
+    return Comparator.comparing(Card::getSuit)
+        .thenComparing(Card::getRank).
+        compare(this,other);
   }
 
 }
